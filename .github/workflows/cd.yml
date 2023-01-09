@@ -22,6 +22,6 @@ jobs:
           toolchain: stable
           override: true
 
-      - run: cargo publish --token ${RUST_CRATES_TOKEN}
+      - run: cargo publish --token ${ secrets.RUST_CRATES_TOKEN }
         env:
-          CRATES_TOKEN: ${{ secrets.RUST_CRATES_TOKEN}}
+          RUST_CRATES_TOKEN: ${{ secrets.RUST_CRATES_TOKEN}}
