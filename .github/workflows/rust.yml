@@ -21,8 +21,9 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-    - run: cargo publish --token ${CRATES_TOKEN}
-      env:
-        CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
+    - uses: actions-rs/cargo@v1
+      with:
+        command: publish
+        args: --dry-run
     
     
