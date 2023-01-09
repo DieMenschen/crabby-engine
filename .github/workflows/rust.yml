@@ -11,12 +11,7 @@ env:
 
 jobs:
   testAndPublish:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os : [windows-latest]
-        toolchain:
-          - stable
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
