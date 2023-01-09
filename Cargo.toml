@@ -9,7 +9,7 @@ edition = "2021"
 authors = ["Pfeifer", "Frischmann", "Goetze"]
 
 repository = "https://github.com/DieMenschen/crabby-engine.git"
-documentation = ""
+documentation = "http://localhost"
 license-file = "./LICENSE"
 description = "A Gameengine to develop simple games"
 keywords = ["gamedev", "graphics"]
