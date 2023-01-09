@@ -10,43 +10,24 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  testAndPublish:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os : [windows-latest]
         toolchain:
           - stable
-          - nightly
 
     steps:
     - uses: actions/checkout@v3
     - name: Build
       run: cargo build --verbose
-      
-  tests:
-      needs: build
-  
-      runs-on: ${{ matrix.os }}
-      strategy:
-        matrix:
-          os : [windows-latest]
-          toolchain:
-            - stable
-            - nightly
-      
-      steps:
-        - name: Run tests
-          run: cargo test --verbose
-          
-  publish:
-    needs: tests
-    
-    runs-on: ubuntu-latest
-    
-    steps:
-      - run: cargo publish --token ${CRATES_TOKEN}
-        env:
-          CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
+
+    - name: Run tests
+      run: cargo test --verbose
+
+    - run: cargo publish --token ${CRATES_TOKEN}
+      env:
+        CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
     
     
