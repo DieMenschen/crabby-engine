@@ -1,0 +1,54 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os : [ubuntu-latest, windows-latest, macos-latest]
+        toolchain:
+          - stable
+          - beta
+          - nightly
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: cargo build --verbose
+      
+  tests:
+      needs: build
+  
+      runs-on: ${{ matrix.os }}
+      strategy:
+        matrix:
+          os : [ubuntu-latest, windows-latest, macos-latest]
+          toolchain:
+            - stable
+            - beta
+            - nightly
+      
+      steps:
+        - name: Run tests
+          run: cargo test --verbose
+          
+  publish:
+    needs: tests
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - run: cargo publish --token ${CRATES_TOKEN}
+        env:
+          CRATES_TOKEN: ${{ secrets.CRATES_TOKEN }}
+    
+    
