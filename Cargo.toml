@@ -11,5 +11,6 @@ authors = ["Pfeifer", "Frischmann", "Goetze"]
 repository = "https://github.com/DieMenschen/crabby-engine.git"
 documentation = ""
 license-file = "./LICENSE"
+description = "A Gameengine to develop simple games"
 
 [dependencies]
